@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+
+</head>
+<body th:fragment="pokeModalFrag">
+<!-- Modal -->
+<div id="pokeModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h1 class="modal-title" id="pokeModalHeader"></h1>
+        <img id="my_image" width="100" height="100" src=""/> 
+      </div>
+      <div class="modal-body">
+       		<label th:text="#{modal.number}"></label>		<label id="pNumber"></label>
+       		<br/>
+       		<label th:text="#{modal.name}"></label>			<label id="pName"></label>
+       		<br/>
+       		<label th:text="#{modal.class}"></label>		<label id="pclass"></label>
+       		<br/>
+        	<label th:text="#{modal.type1}"></label>		<label id="ptypeI"></label>
+      		<br/>
+       		<label th:text="#{modal.type2}"></label>		<label id="ptypeII"></label>
+       		<br/>
+       		<label th:text="#{modal.weakness}"></label>		<label id="pWeakness"></label>
+      		<br/>       		     
+       		<label th:text="#{modal.fastatk}"></label>		<label id="pfastAtk"></label>
+      		<br/>      		
+       		<label th:text="#{modal.spatk}"></label>		<label id="pspecAtk"></label>
+      		<br/>     
+       		<label th:text="#{modal.weight}"></label>		<label id="pweight"></label>
+      		<br/>      		   
+       		<label th:text="#{modal.height}"></label>		<label id="pheight"></label>
+       		<br/>
+       		<label th:text="#{modal.nextevoreq}"></label>	<p id="pnextEvolutionRequirements"></p>
+       		<label th:text="#{modal.nextevo}"></label>		<p id="pnextEvolutions"></p>  
+       		<label th:text="#{modal.prevevo}"></label>		<p id="ppreviousEvolutions"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- bootstrap table fragment for editable tables -->
+<title th:text="#{project.title}"></title>
+<head th:replace="fragments/resources :: resources" ></head>
+<body> 
+	<div th:replace="fragments/_header :: header"></div>
+	<div class="container">
+		<form id="pokedexform" class="form-horizontal" method="post" enctype="multipart/form-data" th:action="@{pokesubmit}" th:object="${pokemonform}">
+			<div th:replace="fragments/_pokemonTable :: pokeTableFrag">&nbsp;</div>
+			<div th:replace="fragments/_pokeModal :: pokeModalFrag">&nbsp;</div>			
+	    </form>
+	</div>
+</body>
+<script th:inline="javascript">
+/*<![CDATA[*/
+$(document).ready(function() {
+	loadpokemondata();
+	changeSearchBoxStyle();
+});	
+
+function changeSearchBoxStyle(){
+	var $search = $('.fixed-table-toolbar .search input');
+	$search.attr('placeholder', 'Search Pokemon');
+	$search.css('border', '2px solid gray');
+	var $searchinput = $('.search');
+	$searchinput.width('100%');
+}
+	
+function loadpokemondata(){
+	$('#poketable').bootstrapTable('refresh',{
+        method: 'get',
+        url : "fillpokemontable?",
+        cache: false,
+        striped: true,
+        pagination: true
+        });
+}
+
+/*]]>*/
+</script>
+</html>

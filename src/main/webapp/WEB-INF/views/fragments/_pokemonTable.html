@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+	<body th:fragment="pokeTableFrag">
+<br/>
+<br/>
+<br/>
+
+<script type="text/javascript">
+
+function imageFormatter(value,row){
+	
+	var parsedvalue = parseInt(value);
+	var $detail_url = '<div align="center"> <a data-toggle="modal" href="#pokeModal" name="select_'+parsedvalue+'"> <img src="resources/images/p'+parsedvalue+'.png" width="100" height="100" alt="myimage"/>  </a> </div>'
+	
+	return $detail_url;
+}
+
+$('#pokedexform').on( "click", '[name^="select_"]', function(element) {
+		var tr = $(this).closest('tr');
+		var td = tr.find('td');
+		var param = td.eq(3).text()+"|"+td.eq(4).text()+"|"+td.eq(5).text()+"|"+td.eq(6).text()+"|"+td.eq(7).text()+"|"+td.eq(8).text()+"|"+td.eq(9).text()+"|"+td.eq(10).text()+"|"+td.eq(11).text()+"|"+td.eq(12).text()+"|"+td.eq(13).text()+"|"+td.eq(14).text()+"|"+td.eq(15).text();
+		passValue(param);
+});
+
+function passValue(val){
+	var newparam = val.split("|");
+	$("#pNumber").text(newparam[0]);
+	$("#pName").text(newparam[1]);
+	$("#pclass").text(newparam[2]);
+	$("#ptypeI").text(newparam[3]);
+	$("#ptypeII").text(newparam[4]);
+	$("#pWeakness").text(newparam[5]);
+	$("#pfastAtk").text(newparam[6]);
+	$("#pspecAtk").text(newparam[7]);
+	$("#pweight").text(newparam[8]);
+	$("#pheight").text(newparam[9]);
+	$("#pnextEvolutionRequirements").text(newparam[10]);
+	$("#pnextEvolutions").text(newparam[11]);
+	$("#ppreviousEvolutions").text(newparam[12]);	
+	
+	$("#pokeModalHeader").text(newparam[1]);
+	
+	var imagelocation= 'resources/images/p'+parseInt(newparam[0])+'.png';
+	
+	$('#my_image').attr('src',imagelocation);
+}
+
+function nameFormatter(value,row){
+	return '<b>'+'#'+row.number+' '+value+'</b>';
+}
+
+function nextEvoFormatterReq(value,row){
+	var returnvar;
+	$.each(row, function(i,rowdata){
+		if(rowdata.name) {
+			returnvar = rowdata.amount +' '+ rowdata.name;
+		}
+	});
+	
+	return returnvar;
+}
+
+function nextEvoFormatter(value,row){
+	var returnvar;
+	
+	if(row.nextEvolutions){
+		$.each(row.nextEvolutions, function(i,rowdata){
+			if(rowdata) {
+				if(returnvar){
+					returnvar = rowdata.number +' '+rowdata.name +' '+  returnvar;
+				}else{
+					returnvar = rowdata.number +' '+rowdata.name;
+				}
+			}
+
+
+		});
+	}
+	return returnvar;
+}
+
+function prevEvoFormatter(value,row){
+	var returnvar;
+	
+	if(row.previousEvolutions){
+		$.each(row.previousEvolutions, function(i,rowdata){
+
+			if(rowdata) {
+				if(returnvar){
+					returnvar = rowdata.number +' '+rowdata.name +' '+  returnvar;
+				}else{
+					returnvar = rowdata.number +' '+rowdata.name;
+				}
+			}
+
+
+		});
+	}
+	return returnvar;
+}
+
+function glyphiconformatter(value,row){
+	var parsedvalue = parseInt(value);
+	return '<a data-toggle="modal" name="select_'+parsedvalue+'" href="#pokeModal"><img src="resources/images/pokestop.png" width="50" height="50" alt="myimage" /></a>'
+}
+	
+</script>
+
+			<table id="poketable" 
+					class="table table-no-bordered" 
+					data-toggle="table" data-cache="false" 
+					data-pagination="true" data-search="true">
+					<thead style="background-color: #a6b3aa;">
+							<tr>
+								<th  
+									data-field="number" 
+									data-sortable="true" 
+									data-formatter="imageFormatter"></th>	
+								<th data-sortable="true" 
+									data-field="name"
+									data-valign="middle"
+									data-formatter="nameFormatter">
+									</th>	
+								<th  
+									data-field="number"
+									data-valign="middle"
+									data-formatter="glyphiconformatter"></th>											
+								<th class="hidden" 
+									data-field="number"
+									data-valign="middle"
+									></th>	
+								<th class="hidden" 
+									data-field="name"
+									data-valign="middle"
+									></th>	
+								<th class="hidden" 
+									data-field="classification"
+									data-valign="middle"
+									></th>	
+								<th class="hidden" 
+									data-field="typeI"
+									data-valign="middle"
+									></th>			
+								<th class="hidden" 
+									data-field="typeII"
+									data-valign="middle"
+									></th>	
+								<th class="hidden" 
+									data-field="weaknesses"
+									data-valign="middle"
+									></th>	
+								<th class="hidden"
+									data-field="fastAttacks"
+									data-valign="middle"
+									></th>	
+								<th class="hidden" 
+									data-field="specialAttacks"
+									data-valign="middle"
+									></th>	
+								<th class="hidden" 
+									data-field="weight"
+									data-valign="middle"
+									></th>	
+								<th class="hidden" 
+									data-field="height"
+									data-valign="middle"
+									></th>	
+								<th class="hidden"
+									data-field="nextEvolutionRequirements"
+									data-formatter="nextEvoFormatterReq"
+									data-valign="middle"
+									></th>		
+									
+								<th class="hidden" 
+									data-field="nextEvolutions"
+									data-formatter="nextEvoFormatter"
+									data-valign="middle"
+									></th>	
+								<th class="hidden" 
+									data-field="previousEvolutions"
+									data-formatter="prevEvoFormatter"
+									data-valign="middle"
+									></th>															
+							</tr>
+					</thead>
+				</table>
+
+	</body>
+</html>
