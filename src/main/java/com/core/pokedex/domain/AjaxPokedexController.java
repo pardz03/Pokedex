@@ -3,6 +3,7 @@ package com.core.pokedex.domain;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,9 +20,12 @@ public class AjaxPokedexController {
 	@Autowired
 	JsonProcessorInterface jsonProcessor;
 	
+	@Autowired
+	Environment env;
+	
 	@RequestMapping(value = PokedexConstants.poketableAjaxMapping)
 	public List<Pokemon> onLoad(){
-		List<Pokemon> pokelist = jsonProcessor.convertJSONtoPokemon(jsonProcessor.getJSONdata());		
+		List<Pokemon> pokelist = jsonProcessor.convertJSONtoPokemon(jsonProcessor.getJSONdata());	
 		return pokelist;
 	}
 

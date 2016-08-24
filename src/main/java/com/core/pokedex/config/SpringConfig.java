@@ -4,6 +4,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -19,6 +21,9 @@ import com.core.pokedex.util.PokedexConstants;
 @EnableWebMvc
 @Configuration
 @ComponentScan(PokedexConstants.projectScanning)
+@PropertySources({
+	@PropertySource("classpath:en.properties")
+})
 public class SpringConfig extends WebMvcConfigurerAdapter {
 	
     private static final String INTERNATIONALIZATION = "/WEB-INF/i18n/en";
